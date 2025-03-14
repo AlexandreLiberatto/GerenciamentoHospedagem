@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-customer',
-  template: `<h1>Customer Module</h1>`,
-  standalone: true,
+  imports: [],
+  templateUrl: './customer.component.html',
+  styleUrl: './customer.component.scss'
 })
-export class CustomerComponent {}
+export class CustomerComponent {
+
+}
