@@ -52,8 +52,16 @@ export class LoginComponent {
            UserStorageService.saveUser(user);
            UserStorageService.saveToken(res.jwt);
 
+           // COLOCAR A PÁNINA PARA IR APÓS O LOGIN 
+           if(UserStorageService.isAdminLoggedIn()){
+            this.router.navigateByUrl('/admin/dashboard');
+
+           } else if (UserStorageService.isCustomerLoggedIn()){
+            this.router.navigateByUrl('/customer/rooms');
+           }
+
           this.message.success('Login realizado com sucesso!', { nzDuration: 5000 });
-          // COLOCAR A PÁNINA PARA IR APÓS O LOGIN this.router.navigateByUrl('/');
+          
         } else {
           this.message.error('Falha ao realizar login, verifique as credenciais.', { nzDuration: 5000 });
         }
