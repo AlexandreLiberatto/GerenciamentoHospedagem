@@ -7,6 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AuthService } from '../../services/auth/auth.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
+import { UserStorageService } from '../../services/storage/user-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -42,9 +43,17 @@ export class LoginComponent {
   submitForm() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(res => {
-        if (res.token) { // Ajuste conforme o retorno da API
+        if (res.userId != null) {
+           const user = {
+            id: res.userId,
+            role: res.userRole
+           }
+
+           UserStorageService.saveUser(user);
+           UserStorageService.saveToken(res.jwt);
+
           this.message.success('Login realizado com sucesso!', { nzDuration: 5000 });
-          this.router.navigateByUrl('/'); // Redireciona para a home ou dashboard
+          
         } else {
           this.message.error('Falha ao realizar login, verifique as credenciais.', { nzDuration: 5000 });
         }
