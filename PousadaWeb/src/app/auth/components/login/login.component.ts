@@ -53,7 +53,7 @@ export class LoginComponent {
            UserStorageService.saveToken(res.jwt);
 
           this.message.success('Login realizado com sucesso!', { nzDuration: 5000 });
-          
+          // COLOCAR A PÁNINA PARA IR APÓS O LOGIN this.router.navigateByUrl('/');
         } else {
           this.message.error('Falha ao realizar login, verifique as credenciais.', { nzDuration: 5000 });
         }
