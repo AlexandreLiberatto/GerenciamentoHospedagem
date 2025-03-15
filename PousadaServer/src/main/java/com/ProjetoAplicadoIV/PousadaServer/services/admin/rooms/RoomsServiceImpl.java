@@ -4,12 +4,14 @@ import com.ProjetoAplicadoIV.PousadaServer.dto.RoomDto;
 import com.ProjetoAplicadoIV.PousadaServer.dto.RoomsResponseDto;
 import com.ProjetoAplicadoIV.PousadaServer.entity.Room;
 import com.ProjetoAplicadoIV.PousadaServer.repository.RoomRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,5 +46,14 @@ public class RoomsServiceImpl implements RoomsService{
         roomsResponseDto.setRoomDtoList(roomPage.stream().map(Room::getRoomDto).collect(Collectors.toList()));
 
         return roomsResponseDto;
+    }
+
+    public RoomDto getRoomById(Long id){
+        Optional<Room> optionalRoom = roomRepository.findById(id);
+        if(optionalRoom.isPresent()){
+            return optionalRoom.get().getRoomDto();
+        } else {
+            throw new EntityNotFoundException("Quarto não encontrado!");
+        }
     }
 }
