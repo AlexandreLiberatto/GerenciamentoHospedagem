@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStorageService } from '../../../auth/services/storage/user-storage.service';
 
+//======== AQUI URL DA API ===============
 const BASIC_URL = "http://localhost:8080/";
 
 @Injectable({
@@ -14,6 +15,12 @@ export class AdminService {
 
   postRoomDetails(rommDto:any): Observable<any>{
     return this.http.post(BASIC_URL + "api/admin/room", rommDto,{
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
+  getRooms(pageNumber:number): Observable<any>{
+    return this.http.get(BASIC_URL + `api/admin/rooms/${pageNumber}`,{
       headers: this.createAuthorizationHeader(),
     })
   }
