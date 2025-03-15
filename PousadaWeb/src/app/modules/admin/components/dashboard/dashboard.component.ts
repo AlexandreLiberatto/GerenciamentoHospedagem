@@ -8,6 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { CommonModule, NgFor } from '@angular/common';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     CommonModule,
     NgFor,
     NzPaginationModule,
+    RouterModule, 
     // outros módulos ou componentes
   ],
   templateUrl: './dashboard.component.html',
