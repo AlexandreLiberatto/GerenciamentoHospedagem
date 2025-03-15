@@ -7,6 +7,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { CommonModule, NgFor } from '@angular/common';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,7 @@ import { CommonModule, NgFor } from '@angular/common';
     NzIconModule,
     CommonModule,
     NgFor,
+    NzPaginationModule,
     // outros módulos ou componentes
   ],
   templateUrl: './dashboard.component.html',
@@ -46,6 +48,11 @@ export class DashboardComponent {
       this.rooms = res.roomDtoList;
       this.total = res.totalPages * 1;
     })
+  }
+
+  nzPageIndexChange(value: any){
+    this.currentPage = value;
+    this.getRooms();
   }
 
 }

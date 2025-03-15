@@ -31,4 +31,10 @@
             </ng-template>
         </div>
     </div>
+
+    <div class="pagination">
+        <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="total" [nzPageSize]="1"
+        (nzPageIndexChange)="nzPageIndexChange($event)" ></nz-pagination>
+    </div>
+
 </div>
