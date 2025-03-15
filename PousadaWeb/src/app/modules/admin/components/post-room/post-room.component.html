@@ -1,1 +1,31 @@
-<p>post-room works!</p>
+<div class="room-details-form-container">
+
+    <nz-form nzLayout="vertical" class="room-details-form" [formGroup]="roomDetailsForm">
+        <div class="form-title">Digite os Detalhes do Quarto</div>
+
+        <nz-form-item>
+            <nz-form-control [nzSpan]="16" [nzOffset]="4">
+                <input nz-input formControlName="name" placeholder="Nome do quarto"/>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control [nzSpan]="16" [nzOffset]="4">
+                <input nz-input formControlName="type" placeholder="Tipo de quarto"/>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control [nzSpan]="16" [nzOffset]="4">
+                <input nz-input formControlName="price" placeholder="Preço da diária"/>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nz-form-item-control [nzSpan]="11" [nzOffset]="4">
+                <button nz-button nzType="primary" type="submit" (click)="submitForm()">Salvar</button>
+            </nz-form-label>
+        </nz-form-item>
+
+    </nz-form>
+</div>
