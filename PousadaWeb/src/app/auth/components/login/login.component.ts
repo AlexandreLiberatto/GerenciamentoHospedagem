@@ -42,31 +42,41 @@ export class LoginComponent {
 
   submitForm() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(res => {
-        if (res.userId != null) {
-           const user = {
-            id: res.userId,
-            role: res.userRole
-           }
-
-           UserStorageService.saveUser(user);
-           UserStorageService.saveToken(res.jwt);
-
-           // COLOCAR A PÁNINA PARA IR APÓS O LOGIN 
-           if(UserStorageService.isAdminLoggedIn()){
-            this.router.navigateByUrl('/admin/dashboard');
-
-           } else if (UserStorageService.isCustomerLoggedIn()){
-            this.router.navigateByUrl('/customer/rooms');
-           }
-
-          this.message.success('Login realizado com sucesso!', { nzDuration: 5000 });
-          
-        } else {
-          this.message.error('Falha ao realizar login, verifique as credenciais.', { nzDuration: 5000 });
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          console.log('Resposta do backend:', res); // Log da resposta para depuração
+  
+          if (res.userId && res.userRole && res.jwt) {
+            const user = {
+              id: res.userId,
+              role: res.userRole
+            };
+  
+            UserStorageService.saveUser(user);
+            UserStorageService.saveToken(res.jwt);
+  
+            if (UserStorageService.isAdminLoggedIn()) {
+              this.router.navigateByUrl('/admin/dashboard');
+            } else if (UserStorageService.isCustomerLoggedIn()) {
+              this.router.navigateByUrl('/customer/rooms');
+            }
+  
+            this.message.success('Login realizado com sucesso!', { nzDuration: 5000 });
+          } else {
+            this.message.error('Falha ao realizar login, verifique as credenciais.', { nzDuration: 5000 });
+          }
+        },
+        error: (error) => {
+          console.error('Erro no login:', error); // Log do erro para depuração
+  
+          if (error.status === 401) {
+            this.message.error('Credenciais inválidas. Verifique seu email e senha.', { nzDuration: 5000 });
+          } else if (error.status === 403) {
+            this.message.error('Acesso negado. Você não tem permissão para acessar este recurso.', { nzDuration: 5000 });
+          } else {
+            this.message.error('Erro no servidor. Tente novamente mais tarde.', { nzDuration: 5000 });
+          }
         }
-      }, error => {
-        this.message.error('Erro no servidor. Tente novamente mais tarde.', { nzDuration: 5000 });
       });
     } else {
       this.message.warning('Preencha todos os campos corretamente.', { nzDuration: 5000 });
