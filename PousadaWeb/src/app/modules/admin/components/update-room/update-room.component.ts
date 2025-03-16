@@ -7,6 +7,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { ActivatedRoute } from '@angular/router';
+import { error } from 'console';
 
 @Component({
   selector: 'app-update-room',
@@ -22,7 +23,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UpdateRoomComponent {
 
     updateRoomForm: FormGroup;
-    id: string; 
+    id: number; 
     
     
   
@@ -38,11 +39,20 @@ export class UpdateRoomComponent {
         type: ['', Validators.required],
         price: ['', Validators.required]
        });
+       this.getRoomById();
 
     }
 
     submitForm(){
       //
+    }
+
+    getRoomById(){
+      this.adminService.getRoomById(this.id).subscribe(res => {
+        this.updateRoomForm.patchValue(res);
+      }, error => {
+        this.message.error(`${error.error}`, { nzDuration: 5000})
+      })
     }
 
 }
