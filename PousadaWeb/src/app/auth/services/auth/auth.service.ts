@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-//==========CONECÇÃO COM API============
+//======== AQUI URL DA API ===============
 const BASIC_URL = "http://localhost:8080/";
 
 @Injectable({

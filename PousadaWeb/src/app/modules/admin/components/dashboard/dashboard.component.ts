@@ -33,7 +33,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 export class DashboardComponent {
 
   //IMAGES
-  quarto1 = 'assets/img/quarto01.jpeg'
+  quarto1 = 'assets/img/quarto01.png'
 
   currentPage = 1;
   rooms = [];
