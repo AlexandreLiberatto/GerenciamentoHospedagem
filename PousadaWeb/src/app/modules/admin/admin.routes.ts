@@ -14,11 +14,11 @@ export const routes: Route[] = [
     component: DashboardComponent,
   },
   {
-    path: 'room/:id/edit',
+    path: 'room',
     component: PostRoomComponent,
   },
   {
-    path: 'room',
+    path: 'room/:id/edit',
     component: UpdateRoomComponent,
   },
 ];

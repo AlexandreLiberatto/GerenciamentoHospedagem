@@ -9,6 +9,8 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { CommonModule, NgFor } from '@angular/common';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { RouterModule } from '@angular/router';
+import { error } from 'console';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,6 +42,7 @@ export class DashboardComponent {
 
   constructor(private adminService: AdminService,
     private message: NzMessageService,
+    private modalService: NzModalService,
   ){
     this.getRooms();
   }
@@ -55,6 +58,25 @@ export class DashboardComponent {
   nzPageIndexChange(value: any){
     this.currentPage = value;
     this.getRooms();
+  }
+
+  showConfirm(roomId:number){
+    this.modalService.confirm({
+      nzTitle: 'Confirmação',
+      nzContent: 'Tem certeza que deseja deletar este quarto?',
+      nzOkText: 'Deletar',
+      nzCancelText: 'Cancelar',
+      nzOnOk: () => this.deleteRoom(roomId)
+    })
+  }
+
+  deleteRoom(roomId:number){
+    this.adminService.deleteRoom(roomId).subscribe(res => {
+      this.message.success(`Quarto deletado com sucesso!`, { nzDuration: 5000});
+      this.getRooms();
+    }, error => {
+      this.message.error(`${error.error}`, { nzDuration: 5000})
+    })
   }
 
 }
