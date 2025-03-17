@@ -1,5 +1,6 @@
 package com.ProjetoAplicadoIV.PousadaServer.entity;
 
+import com.ProjetoAplicadoIV.PousadaServer.dto.ReservationDto;
 import com.ProjetoAplicadoIV.PousadaServer.enun.ReservationStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -33,4 +34,23 @@ public class Reservation {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
+
+    public ReservationDto getReservationDto(){
+        ReservationDto reservationDto = new ReservationDto();
+
+        reservationDto.setId(id);
+        reservationDto.setPrice(price);
+        reservationDto.setCheckInDate(checkInDate);
+        reservationDto.setCheckOutDate(checkOutDate);
+        reservationDto.setReservationStatus(reservationStatus);
+
+        reservationDto.setUserId(user.getId());
+        reservationDto.setUsername(user.getName());
+
+        reservationDto.setRoomId(room.getId());
+        reservationDto.setRoomName(room.getName());
+        reservationDto.setRoomType(room.getType());
+
+        return reservationDto;
+    }
 }
