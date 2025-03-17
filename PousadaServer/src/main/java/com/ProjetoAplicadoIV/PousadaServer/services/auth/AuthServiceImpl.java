@@ -24,7 +24,9 @@ public class AuthServiceImpl implements AuthService {
         Optional<User> adminAccount = userRepository.findByUserRole(UserRole.ADMIN);
         if (adminAccount.isEmpty()) {
             User user = new User();
-            user.setEmail("admin@test.com");
+            //======= E-MAIL PADRÃO ADMIN =======
+            user.setEmail("admin@gmail.com");
+            //======= SENHA PADRÃO ADMIN =======
             user.setName("admin");
             user.setUserRole(UserRole.ADMIN);
             user.setPassword(new BCryptPasswordEncoder().encode("admin"));
