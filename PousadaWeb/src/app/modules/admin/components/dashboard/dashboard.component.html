@@ -5,10 +5,10 @@
         <div class="room-row" *ngFor="let room of rooms">
             <nz-card style="width: 300px; margin: 16px;" [nzActions]="[actionEdit, actionDelete]">
                 <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large'}">
-                    <nz-card-meta [nzAvatar]="avatarTemplate" nzTitle="{{ room.name }}" nzDescription="Type: {{ room.type }}">
+                    <nz-card-meta [nzAvatar]="avatarTemplate" nzTitle="{{ room.name }}" nzDescription="Tipo: {{ room.type }}">
                         
                     </nz-card-meta>
-                        <nz-card-meta style="margin-left: 49px;" nzDescription="Price: {{ room.price }}">
+                        <nz-card-meta style="margin-left: 49px;" nzDescription="Preço: {{ room.price }}">
                             
                         </nz-card-meta>
                 </nz-skeleton>
