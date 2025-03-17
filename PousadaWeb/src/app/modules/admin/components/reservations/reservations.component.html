@@ -9,7 +9,7 @@
                 <th>Data de Entrada</th>
                 <th>Data de Saída</th>
                 <th>Preço</th>
-                <th>Colaborador</th>
+                <th>Usuário</th>
                 <th>Status</th>
                 <th>Ativo</th>
             </tr>
@@ -22,8 +22,37 @@
                 <td>{{ reservations.checkOutDate }}</td>
                 <td>{{ reservations.price }}</td>
                 <td>{{ reservations.username }}</td>
-                <td></td>
-                <td></td>
+                <td>
+                    <ng-container *ngIf="reservations.reservationStatus === 'PENDING'">
+                        <nz-tag nzColor="processing">
+                            <span nz-icon nzType="sync" nzSpin></span>
+                            <span>Pendente</span>
+                        </nz-tag>
+                    </ng-container>
+                    <ng-container *ngIf="reservations.reservationStatus === 'APROVED'">
+                        <nz-tag nzColor="success">
+                            <span nz-icon nzType="check-circle"></span>
+                            <span>Aprovado</span>
+                        </nz-tag>
+                    </ng-container>
+                    <ng-container *ngIf="reservations.reservationStatus === 'REJECTED'">
+                        <nz-tag nzColor="error">
+                            <span nz-icon nzType="close-circle"></span>
+                            <span>Regeitado</span>
+                        </nz-tag>
+                    </ng-container>
+                </td>
+                <td>
+                    <span *ngIf="reservations.reservationStatus == 'PENDING'">
+                        <span nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" 
+                        [nzTwotoneColor]="'#52c41a'" class="icon" (click)="changeReservationStatus(reservations.id, 'Aprovado')">
+                        </span>
+                        <span nz-icon [nzType]="'close-circle'" [nzTheme]="'twotone'" 
+                        [nzTwotoneColor]="'#ff0000'" class="icon" (click)="changeReservationStatus(reservations.id, 'Regeitado')">
+
+                        </span>
+                    </span>
+                </td>
             </tr>
         </tbody>
 

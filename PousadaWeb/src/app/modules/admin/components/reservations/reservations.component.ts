@@ -4,13 +4,18 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CommonModule } from '@angular/common';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { error } from 'console';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-reservations',
   imports: [
     CommonModule, 
     NzTableModule, 
-    NzPaginationModule
+    NzPaginationModule,
+    NzTagModule,
+    NzIconModule 
   ],
   templateUrl: './reservations.component.html',
   styleUrl: './reservations.component.scss'
@@ -38,6 +43,16 @@ export class ReservationsComponent {
   pageIndexChange(value:any){
     this.currentPage = value;
     this.getReservations();
+  }
+
+  changeReservationStatus(bookingId:number, status:string){
+    this.adminService.changeReservationStatus(bookingId, status).subscribe(res => {
+      this.message.success(`Status da reserva atualizado com sucesso!`, { nzDuration: 5000 });
+
+      this.getReservations();
+    }, error => {
+      this.message.error(`${error.error}`, { nzDuration: 5000 });
+    })
   }
 
 }
