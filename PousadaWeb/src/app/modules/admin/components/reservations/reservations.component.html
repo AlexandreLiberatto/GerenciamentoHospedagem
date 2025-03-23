@@ -45,10 +45,10 @@
                 <td>
                     <span *ngIf="reservations.reservationStatus == 'PENDING'">
                         <span nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" 
-                        [nzTwotoneColor]="'#52c41a'" class="icon" (click)="changeReservationStatus(reservations.id, 'Aprovado')">
+                        [nzTwotoneColor]="'#52c41a'" class="icon" (click)="changeReservationStatus(reservations.id, 'APROVED')">
                         </span>
                         <span nz-icon [nzType]="'close-circle'" [nzTheme]="'twotone'" 
-                        [nzTwotoneColor]="'#ff0000'" class="icon" (click)="changeReservationStatus(reservations.id, 'Regeitado')">
+                        [nzTwotoneColor]="'#ff0000'" class="icon" (click)="changeReservationStatus(reservations.id, 'REJECTED')">
 
                         </span>
                     </span>
