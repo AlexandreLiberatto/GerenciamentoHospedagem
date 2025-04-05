@@ -1,0 +1,12 @@
+# Exported from Render on 2025-04-05T23:44:22Z
+services:
+  - type: web
+    name: GerenciamentoHospedagem
+    runtime: docker
+    repo: https://github.com/AlexandreLiberatto/GerenciamentoHospedagem
+    plan: free
+    region: oregon
+    dockerContext: .
+    dockerfilePath: Dockerfile
+    rootDir: PousadaServer/
+version: "1"
