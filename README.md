@@ -70,7 +70,7 @@ Principais arquivos e diretórios:
   - `UserRole.java`: Perfis de usuários
 
 ### Frontend (Angular 19)
-Localização: `PousadaClient`
+Localização: `PousadaWeb`
 
 Principais módulos e componentes:
 - `src/app/modules/auth/`
@@ -152,7 +152,7 @@ Permite visualizar todas as reservas feitas, com detalhes:
 ### Frontend (Angular 19)
 1. Acesse o diretório do frontend:
    ```sh
-   cd PousadaClient
+   cd PousadaWeb
    ```
 2. Instale as dependências:
    ```sh
